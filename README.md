@@ -2,7 +2,7 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #12-Building-Game-Cards_mp4_6min_08sec ] - building game cards, `GameCard.ts`.
+[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #13-Displaying-Platform-Icons_mp4_13min_42sec ] - displaying platform icons.
 
 
 # my-github Account : 
