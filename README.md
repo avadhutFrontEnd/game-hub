@@ -2,7 +2,7 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #13-Displaying-Platform-Icons_mp4_13min_42sec ] - displaying platform icons.
+[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: 14-Displaying-Critic-Score_mp4_4min_20sec ] - displaying critic score, `CriticScore.tsx`.
 
 
 # my-github Account : 
