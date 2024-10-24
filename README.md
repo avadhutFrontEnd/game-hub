@@ -2,7 +2,7 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: 16-Improving-User-Experience-with-Loading-Skeletons_mp4_5min_37sec ] - Show loading skeletons, `GameCardSkeleton.tsx`
+[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #17-Refactor-Removing-Duplicated-Styles_mp4_2min_34sec ] - Refactor: Remove Duplicated Styles, `GameCardContainer.tsx`
 
 
 # my-github Account : 
