@@ -2,7 +2,7 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #17-Refactor-Removing-Duplicated-Styles_mp4_2min_34sec ] - Refactor: Remove Duplicated Styles, `GameCardContainer.tsx`
+[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #18-Fetching-the-Genres_mp4_4min_31sec ] - fetch the Genres, added new file `useGenres.ts` in "hooks" folder, render Genres data in `GenreList.tsx` component.
 
 
 # my-github Account : 
