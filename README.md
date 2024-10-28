@@ -2,7 +2,7 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #19-Creating-a-Generic-Data-Fetching-Hook_mp4_6min_42sec ] - create a generic data fetching hook, `useData.ts`.
+[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #20-Displaying-the-Genres_mp4_8min_52sec ] - display genres.
 
 
 # my-github Account : 
