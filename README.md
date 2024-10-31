@@ -2,7 +2,7 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #21-Showing-a-Spinner_mp4_1min_27sec ] - show a spinner while fetching the genres.
+[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #22-Filtering-Games-by-Genre_mp4_12min_33sec ] - filter games by genre.
 
 
 # my-github Account : 
