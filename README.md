@@ -2,7 +2,7 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #22-Filtering-Games-by-Genre_mp4_12min_33sec ] - filter games by genre.
+[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #23-Highlighting-the-Selected-Genre_mp4_1min_43sec ] - highlight the selected genre.
 
 
 # my-github Account : 
