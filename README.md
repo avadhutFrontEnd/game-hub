@@ -2,7 +2,7 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #24-Building-Platform-Selector_mp4_4min_30sec ] - Build platform selector.
+[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #25-Filtering-Games-by-Platform_mp4_6min_15sec ] - filter games by platform.
 
 
 # my-github Account : 
