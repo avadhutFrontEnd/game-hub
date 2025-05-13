@@ -2,7 +2,7 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #26-Refactoring-Extracting-a-Query-Object_mp4_5min_11sec ] - Query Object Pattern.
+[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #27-Building-Sort-Selector_mp4_2min_59sec ] - Query Object Pattern.
 
 
 # my-github Account : 
