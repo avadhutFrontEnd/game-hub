@@ -2,7 +2,7 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #25-Filtering-Games-by-Platform_mp4_6min_15sec ] - filter games by platform.
+[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #26-Refactoring-Extracting-a-Query-Object_mp4_5min_11sec ] - Query Object Pattern.
 
 
 # my-github Account : 
