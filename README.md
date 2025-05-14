@@ -2,7 +2,7 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #30-Fixing-the-Issue-with-Chakra-Menus_mp4_1min_28s ] - replace the horizontal stack with a flex component.
+[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #31-Building-Search-Input_mp4_2min_38sec ] - add an input box here for Searching Games.
 
 
 # my-github Account : 
