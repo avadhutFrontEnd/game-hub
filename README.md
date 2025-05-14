@@ -2,7 +2,7 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #31-Building-Search-Input_mp4_2min_38sec ] - add an input box here for Searching Games.
+[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #32-Searching-Games_mp4_6min_05sec ] - Implement Searching.
 
 
 # my-github Account : 
