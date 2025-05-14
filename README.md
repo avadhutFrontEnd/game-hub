@@ -2,7 +2,7 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #29-Handling-Games-without-an-Image_mp4_1min_07sec ] - Handle Games without an image, we'll use a default placeholder.
+[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #30-Fixing-the-Issue-with-Chakra-Menus_mp4_1min_28s ] - replace the horizontal stack with a flex component.
 
 
 # my-github Account : 
