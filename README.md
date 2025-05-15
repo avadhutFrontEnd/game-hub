@@ -2,8 +2,7 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: 
-#38-Customizing-the-Chakra-Theme_mp4_2min_57sec ] - We should replace the entire gray palette with a new one so all the shades of gray have a nice harmony. 
+[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #39-Refactoring-Game-Grid_mp4_56sec ] - 
 
 
 # my-github Account : 
