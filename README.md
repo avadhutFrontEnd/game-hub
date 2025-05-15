@@ -3,7 +3,7 @@ react project game-hub
 
 # Commit message format : 
 [Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: 
-#36-Adding-Emojis_mp4_5min_35sec ] - inject some fun into our app by adding emojis to our game cards.
+#37-Shipping-Static-Data_mp4_3min_16sec ] - Since the list of genres hardly ever changes, we can treat it as static data and include it with our app. we won't need to make an extra request to our backend and the data will be available right away. No need to wait and show a spinner.
 
 
 # my-github Account : 
