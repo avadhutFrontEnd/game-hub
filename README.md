@@ -3,7 +3,7 @@ react project game-hub
 
 # Commit message format : 
 [Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: 
-#34-Cleaning-Up-the-Genres_mp4_2min_20sec ] - 
+#35-Cleaning-Up-the-Game-Cards_mp4_1min_23sec ] - 
 
 
 # my-github Account : 
