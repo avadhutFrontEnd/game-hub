@@ -3,7 +3,7 @@ react project game-hub
 
 # Commit message format : 
 [Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: 
-#37-Shipping-Static-Data_mp4_3min_16sec ] - Since the list of genres hardly ever changes, we can treat it as static data and include it with our app. we won't need to make an extra request to our backend and the data will be available right away. No need to wait and show a spinner.
+#38-Customizing-the-Chakra-Theme_mp4_2min_57sec ] - We should replace the entire gray palette with a new one so all the shades of gray have a nice harmony. 
 
 
 # my-github Account : 
