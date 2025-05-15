@@ -3,7 +3,7 @@ react project game-hub
 
 # Commit message format : 
 [Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: 
-#35-Cleaning-Up-the-Game-Cards_mp4_1min_23sec ] - 
+#36-Adding-Emojis_mp4_5min_35sec ] - inject some fun into our app by adding emojis to our game cards.
 
 
 # my-github Account : 
