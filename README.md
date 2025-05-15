@@ -2,7 +2,8 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: #33-Adding-a-Dynamic-Heading_mp4_4min_38sec ] - Add a dynamic heading to this page that changes based on the current filters.
+[Course: 1. React 18 for Beginners > 8-Building a Video Game Discovery App(3h) ] [ Video: 
+#34-Cleaning-Up-the-Genres_mp4_2min_20sec ] - 
 
 
 # my-github Account : 
