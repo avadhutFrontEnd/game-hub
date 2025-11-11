@@ -2,22 +2,19 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 2. React 18 for Intermediate Topics > 2. Fetching and Updating Data with React Query (3h) ] [ Video: #24-Exercise-Fetching-Genres_mp4_10min_55sec ] - Feature: Implement React Query for Genre Fetching
+[Course: 2. React 18 for Intermediate Topics > 2. Fetching and Updating Data with React Query (3h) ] [ Video: #25-Exercise-Fetching-Platforms_mp4_3min_30sec ] - Feature: Implement React Query for Platform Fetching.
 
-## Implement React Query for Genre Fetching and Caching
+## Refactor platform fetching using React Query with caching
 
-Refactored the genre data fetching in the Game Hub project to use React Query, following the exercise prompt.
+Completed the exercise by refactoring the `usePlatforms` hook to fetch parent platforms using React Query, applying caching optimization with initial static data.
 
 ### Key Changes:
-* **Setup React Query:** Installed `@tanstack/react-query` and `@tanstack/react-query-devtools`, and configured `QueryClientProvider` and `ReactQueryDevtools` in `main.tsx`.
-* **Refactor `useGenres`:**
-    * Replaced static data fetching with a `useQuery` hook to fetch genres from the API via `api-client`.
-    * Updated the return type by importing the generic `FetchResponse` interface from `useData.ts` to correctly handle the API response structure (`{ count, results }`).
-    * Introduced **`staleTime`** (24 hours) to optimize caching for the rarely changing genre list.
-    * Added **`initialData`** using the existing static `genres` array, wrapped to match the API response structure, to eliminate the initial loading spinner.
-* **Update `useData`:** Exported the `FetchResponse` generic interface to be reusable across other hooks.
-* **Update `GenreList`:** Modified the component to access `data.results` instead of just `data` for iteration, aligning with the new `FetchResponse` type.
-
+* **Refactor `usePlatforms` Hook:** Replaced the static data loading in `usePlatforms.ts` with the `useQuery` hook.
+    * The **`queryFn`** now calls the specific API endpoint `/platforms/lists/parents` to fetch only the parent/top-level platforms.
+    * The response is typed using the generic `FetchResponse<Platform>` interface.
+* **Implement Caching:** Set a **`staleTime`** of 24 hours (`24 * 60 * 60 * 1000`) for the platforms data.
+* **Provide `initialData`:** Used the existing static data from `platforms.ts` as **`initialData`** (wrapped as `{ count, results }`) to prevent a loading spinner on the first render, significantly improving perceived performance.
+* **Update `PlatformSelector`:** Modified the component to correctly access and iterate over the fetched data using **`data?.results.map(...)`**, aligning with the `FetchResponse` structure.
 
 # my-github Account : 
 https://github.com/avadhutFrontEnd/game-hub/
