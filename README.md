@@ -2,23 +2,22 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 2. React 18 for Intermediate Topics > 2. Fetching and Updating Data with React Query (3h)] [Video: #28-Exercise-Creating-a-Reusable-API-Client_mp4_5min_44sec] - feat: Centralize data fetching logic using generic APIClient class
+[Course: 2. React 18 for Intermediate Topics > 2. Fetching and Updating Data with React Query (3h) ] [ Video: #29-Exercise-Implementing-Infinite-Queries_mp4_7min_39sec ] - Feature: Implement Infinite Queries for Games
 
-## feat: Centralize data fetching logic using generic APIClient class
+## Implement infinite scrolling/pagination for game list using React Query
 
-**Refactor:**
+Refactored the game fetching mechanism to use `useInfiniteQuery` to support loading subsequent pages of games via a "Load More" button.
 
-* **APIClient (`api-client.ts`):**
-    * Refactored `api-client.ts` to export a **generic `APIClient<T>` class** instead of the default Axios instance.
-    * The class encapsulates the common logic of calling `axiosInstance.get`, handling the `FetchResponse<T>` type, and extracting the result (`.then(res => res.data)`).
-    * Added an optional `config: AxiosRequestConfig` parameter to `getAll` to support passing query string parameters (used for filtering and sorting).
-    * Used **arrow function syntax** for `getAll` to correctly bind `this.endpoint`.
-* **Hooks:**
-    * Updated `useGenres.ts`, `usePlatforms.ts`, and `useGames.ts` to instantiate `APIClient<T>` for their respective endpoints.
-    * Replaced the inline `queryFn` logic with a reference to **`apiClient.getAll`** (for genres and platforms).
-    * For `useGames.ts`, `queryFn` was wrapped in an arrow function to pass the **`gameQuery` parameters** as the configuration object to `apiClient.getAll`.
-
-**Benefit:** This change removes data fetching and response processing duplication from the individual hooks, making the data layer cleaner and easier to maintain.
+### Key Changes:
+* **Refactor `useGames` Hook:**
+    * Switched from `useQuery` to **`useInfiniteQuery`**.
+    * Updated **`queryFn`** to accept and utilize the `pageParam` (defaulting to 1) for fetching games using the `/games` endpoint with the `page` query parameter.
+    * Implemented **`getNextPageParam`** logic: returns `allPages.length + 1` if `lastPage.next` (the next page URL from the API) is present, otherwise returns `undefined` to signal the end of the list.
+* **Update `FetchResponse` Interface:** Added the **`next: string | null`** property to the generic `FetchResponse` interface in `api-client.ts` to support pagination checks.
+* **Update `GameGrid` Component:**
+    * Modified the rendering logic to iterate over `data?.pages` and then `page.results` to display all loaded pages/games.
+    * Imported and utilized `hasNextPage`, `fetchNextPage`, and `isFetchingNextPage` from the infinite query result.
+    * Added a dynamic **"Load More" button** at the bottom of the grid, which only appears if `hasNextPage` is true, to trigger fetching the next page.
 
 # my-github Account : 
 https://github.com/avadhutFrontEnd/game-hub/
