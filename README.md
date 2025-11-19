@@ -2,18 +2,18 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 2. React 18 for Intermediate Topics > 2. Fetching and Updating Data with React Query (3h) ] [ Video: #32-Exercise-Creating-Lookup-Hooks_mp4_6min_59sec ] - Refactor: Create Lookup Hooks
+[Course: 2. React 18 for Intermediate Topics > 2. Fetching and Updating Data with React Query (3h) ] [ Video: #33-Exercise-Simplifying-Time-Calculations_mp4_3min_31sec ] - Refactor: Simplify Time Calculations
 
-## Encapsulate platform and genre lookup logic into reusable custom hooks
+## Use the 'ms' library to simplify stale time configuration
 
-Addressed code duplication in components like `GameHeading` and `PlatformSelector` by creating simple custom hooks (`usePlatform` and `useGenre`) to find an item by its ID from the cached data fetched by React Query.
+Replaced manual calculation of milliseconds for `staleTime` with the **`ms`** library to make time values more readable and less error-prone.
 
 ### Key Changes:
-* **Created `usePlatform.ts`:** A custom hook that accepts an optional `platformId` and returns the corresponding `Platform` object by searching the data retrieved from `usePlatforms()`.
-* **Created `useGenre.ts`:** A custom hook that accepts an optional `genreId` and returns the corresponding `Genre` object by searching the data retrieved from `useGenres()`.
-* **Refactor `GameHeading.tsx`:** Replaced the direct lookup logic for both platform and genre with calls to `usePlatform(gameQuery.platformId)` and `useGenre(gameQuery.genreId)`.
-* **Refactor `PlatformSelector.tsx`:** Replaced the internal platform lookup logic with a call to `usePlatform(selectedPlatformId)`.
-* **Refactor Static Data:** Updated **`src/data/genres.ts`** and **`src/data/platforms.ts`** to match the full `FetchResponse` structure (including `count`, `next`, and `previous`) to ensure **`initialData`** in `useGenres.ts` and `usePlatforms.ts` is type-safe and consistent with the remote API response.
+* **Installation:** Installed the `ms` library and its development types (`npm i ms @types/ms -D`).
+* **Update Hooks (`useGames.ts`, `useGenres.ts`, `usePlatforms.ts`):**
+    * Imported `ms` from `"ms"`.
+    * Updated the `staleTime` property in all `useQuery` and `useInfiniteQuery` calls to use `ms("24h")` instead of the manual calculation (`24 * 60 * 60 * 1000`), greatly improving code clarity.
+* **Cleanup:** Removed unused imports (e.g., `useQuery` in `useGames.ts`).
 
 # my-github Account : 
 https://github.com/avadhutFrontEnd/game-hub/
