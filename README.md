@@ -2,24 +2,26 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 2. React 18 for Intermediate Topics > 2. Fetching and Updating Data with React Query (3h) ] [ Video: #30-Exercise-Implementing-Infinite-Scroll_mp4_5min_38sec ] - Feature: Implement Infinite Scroll
+[Course: 2. React 18 for Intermediate Topics > 2. Fetching and Updating Data with React Query (3h) ] [ Video: #31-Exercise-Simplifying-Query-Objects_mp4_10min_24sec ] - Refactor: Simplify GameQuery object
 
-## Transitioned from "Load More" button to automatic infinite scrolling.
+## Refactor GameQuery state to store only IDs instead of full objects
 
-Replaced the manual pagination button with the **`react-infinite-scroll-component`** library for a smoother user experience, automatically fetching the next page of games as the user scrolls to the bottom of the list.
+Simplified the `GameQuery` object in `App.tsx` by replacing the full `Genre` and `Platform` objects with only their respective **IDs**. This makes the **React Query key much cleaner and more efficient**.
 
 ### Key Changes:
-* **Installed `react-infinite-scroll-component` (v6.1).**
-* **Refactor `GameGrid.tsx`:**
-    * The `SimpleGrid` is now wrapped in the **`<InfiniteScroll>`** component.
-    * Computed **`fetchedGamesCount`** using `data.pages.reduce()` to set the required `dataLength` prop.
-    * Set `hasMore={!!hasNextPage}` to control when fetching should stop.
-    * Set the `next` prop to `fetchNextPage()`, triggering the next API call automatically.
-    * Set the `loader` prop to a Chakra UI **`<Spinner />`** for visual feedback while loading.
-    * Removed the no-longer-needed "Load More" button and the wrapping `<Box>` component.
-    * Moved padding from the removed `<Box>` to the `<SimpleGrid>`.
-* **Update `useGames.ts` Hook:**
-    * Added a **`staleTime`** of 24 hours (`24 * 60 * 60 * 1000`) to the `useInfiniteQuery` options to cache the game data for a longer duration.
+* **Update `GameQuery` Interface (`App.tsx`):**
+    * Renamed `genre` to **`genreId`** and changed its type from `Genre | null` to `number | undefined` (or optional `number`).
+    * Renamed `platform` to **`platformId`** and changed its type from `Platform | null` to `number | undefined` (or optional `number`).
+* **Update State Handling (`App.tsx`):**
+    * When selecting a genre or platform, the state is updated to store only `genre.id` or `platform.id`.
+* **Update `useGames` Hook (`useGames.ts`):**
+    * Updated `apiClient.getAll` call to use `gameQuery.genreId` and `gameQuery.platformId` directly in the URL parameters.
+* **Update Dependent Components (Displaying Names):**
+    * **`GameHeading.tsx`:** Updated to use `useGenres()` and `usePlatforms()` hooks to fetch the full lists and then **find** the selected `genre` or `platform` object using the stored ID (`gameQuery.genreId` or `gameQuery.platformId`) before rendering the name.
+    * **`GenreList.tsx`:** Updated the `selectedGenre` prop to accept **`selectedGenreId?: number`**.
+    * **`PlatformSelector.tsx`:** Updated the `selectedPlatform` prop to accept **`selectedPlatformId?: number`** and includes logic to find the selected platform object by ID to display its name in the menu button.
+
+This ensures the React Query cache key remains minimal and only contains the data necessary for fetching the resource.
 
 # my-github Account : 
 https://github.com/avadhutFrontEnd/game-hub/
