@@ -2,22 +2,24 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 2. React 18 for Intermediate Topics > 2. Fetching and Updating Data with React Query (3h) ] [ Video: #29-Exercise-Implementing-Infinite-Queries_mp4_7min_39sec ] - Feature: Implement Infinite Queries for Games
+[Course: 2. React 18 for Intermediate Topics > 2. Fetching and Updating Data with React Query (3h) ] [ Video: #30-Exercise-Implementing-Infinite-Scroll_mp4_5min_38sec ] - Feature: Implement Infinite Scroll
 
-## Implement infinite scrolling/pagination for game list using React Query
+## Transitioned from "Load More" button to automatic infinite scrolling.
 
-Refactored the game fetching mechanism to use `useInfiniteQuery` to support loading subsequent pages of games via a "Load More" button.
+Replaced the manual pagination button with the **`react-infinite-scroll-component`** library for a smoother user experience, automatically fetching the next page of games as the user scrolls to the bottom of the list.
 
 ### Key Changes:
-* **Refactor `useGames` Hook:**
-    * Switched from `useQuery` to **`useInfiniteQuery`**.
-    * Updated **`queryFn`** to accept and utilize the `pageParam` (defaulting to 1) for fetching games using the `/games` endpoint with the `page` query parameter.
-    * Implemented **`getNextPageParam`** logic: returns `allPages.length + 1` if `lastPage.next` (the next page URL from the API) is present, otherwise returns `undefined` to signal the end of the list.
-* **Update `FetchResponse` Interface:** Added the **`next: string | null`** property to the generic `FetchResponse` interface in `api-client.ts` to support pagination checks.
-* **Update `GameGrid` Component:**
-    * Modified the rendering logic to iterate over `data?.pages` and then `page.results` to display all loaded pages/games.
-    * Imported and utilized `hasNextPage`, `fetchNextPage`, and `isFetchingNextPage` from the infinite query result.
-    * Added a dynamic **"Load More" button** at the bottom of the grid, which only appears if `hasNextPage` is true, to trigger fetching the next page.
+* **Installed `react-infinite-scroll-component` (v6.1).**
+* **Refactor `GameGrid.tsx`:**
+    * The `SimpleGrid` is now wrapped in the **`<InfiniteScroll>`** component.
+    * Computed **`fetchedGamesCount`** using `data.pages.reduce()` to set the required `dataLength` prop.
+    * Set `hasMore={!!hasNextPage}` to control when fetching should stop.
+    * Set the `next` prop to `fetchNextPage()`, triggering the next API call automatically.
+    * Set the `loader` prop to a Chakra UI **`<Spinner />`** for visual feedback while loading.
+    * Removed the no-longer-needed "Load More" button and the wrapping `<Box>` component.
+    * Moved padding from the removed `<Box>` to the `<SimpleGrid>`.
+* **Update `useGames.ts` Hook:**
+    * Added a **`staleTime`** of 24 hours (`24 * 60 * 60 * 1000`) to the `useInfiniteQuery` options to cache the game data for a longer duration.
 
 # my-github Account : 
 https://github.com/avadhutFrontEnd/game-hub/
