@@ -2,45 +2,48 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 2. React 18 for Intermediate Topics > 3. Global State Management (2h) ] [ Video: #22-Exercise-Setting-Up-a-Zustand-Store_mp4_6min_44sec ] - Setup: Zustand Store for GameQuery
+[Course: 2. React 18 for Intermediate Topics > 3. Global State Management (2h) ] [ Video: #23-Exercise-Removing-Props_mp4_12min_03sec ] - Refactor: Eliminate Prop Drilling using Zustand
 
-## Set up a Zustand store (`useGameQueryStore`) to manage the application's global `GameQuery` object.
+## Successfully refactored the Game Hub application to eliminate prop drilling by accessing the `GameQuery` state directly from the Zustand store.
 
-The first step in refactoring the Game Hub application to use Zustand has been completed by creating a dedicated store to hold and update the game query parameters. This moves the state out of the top-level `App` component.
-
----
-
-### Key Steps:
-
-1.  **Installation:** Installed the `zustand` library.
-2.  **State Definition (`src/store.ts`):**
-    * **Moved `GameQuery` Interface:** The `GameQuery` interface, which defines the shape of the query object (including optional `genreId`, `platformId`, `sortOrder`, and `searchText`), was moved from `App.tsx` to `store.ts`.
-    * **Defined `GameQueryStore` Interface:** This interface defines the store's public API:
-        * The state: `gameQuery: GameQuery`.
-        * The actions: `setSearchText`, `setGenreId`, `setPlatformId`, `setSortOrder`.
-3.  **Store Implementation:**
-    * Used `create<GameQueryStore>` to initialize the store and exported the resulting hook as **`useGameQueryStore`**.
-    * **Initial State:** Set `gameQuery` to an empty object `{}`.
-4.  **Action Logic:**
-    * **`setSearchText` Logic:** When the search text is updated, **all other filters are cleared** to ensure a focused search. This is achieved by returning a new `gameQuery` object with *only* `searchText` set:
-        ```typescript
-        setSearchText: (searchText) => set(() => ({ gameQuery: { searchText } })),
-        ```
-    * **Filter/Sort Logic:** For updating `genreId`, `platformId`, and `sortOrder`, the current state is preserved using the spread operator before applying the new value:
-        ```typescript
-        setGenreId: (genreId) => 
-          set((store) => ({ gameQuery: { ...store.gameQuery, genreId } })),
-        ```
-
-### Current Status:
-
-The `src/App.tsx` component is currently in a broken state because the `GameQuery` interface and the local `useState` hook managing the game query were removed/modified but not yet replaced with the Zustand logic. This will be addressed in the next lesson.
+The refactoring process involved removing the `useState` management from the top-level `App` component and updating all dependent components to use the `useGameQueryStore` hook and selectors. This resulted in cleaner component interfaces and centralized state logic.
 
 ---
 
-The next lesson will involve consuming this new Zustand store in the application components to replace the old prop drilling and local state management.
+### Key Refactoring Changes:
 
-Would you like to move on to the next lesson, which addresses integrating the `useGameQueryStore` into the application?
+1.  **`App.tsx` Simplification:**
+    * Deleted the `useState` hook managing `gameQuery`.
+    * **Removed all `gameQuery` props** passed to child components (`<NavBar />`, `<GenreList />`, `<PlatformSelector />`, `<SortSelector />`, `<GameGrid />`, `<GameHeading />`). The component now only manages layout.
+
+2.  **Component State Access (Using Selectors):**
+    * **State Consumers (Read Only):** Components like `GameHeading`, `GenreList`, `PlatformSelector`, and `SortSelector` now use selectors to read only the specific parts of the state they need (e.g., `s.gameQuery.genreId`, `s.gameQuery.platformId`, `s.gameQuery.sortOrder`). This prevents unnecessary re-renders when unrelated parts of the store change.
+        * *Example in `GameHeading.tsx`*:
+          ```typescript
+          const genreId = useGameQueryStore((s) => s.gameQuery.genreId);
+          ```
+
+3.  **Component Action Access (Using Selectors):**
+    * **State Modifiers:** Components that trigger state changes (e.g., `SearchInput`, `GenreList`) now use selectors to access only the relevant setter function (`setSearchText`, `setGenreId`, etc.). This ensures the component only re-renders if the function itself were to change (which it won't in this case), avoiding unnecessary dependency on the entire store object.
+        * *Example in `SearchInput.tsx`*:
+          ```typescript
+          const setSearchText = useGameQueryStore((s) => s.setSearchText);
+          // ... call setSearchText(ref.current.value) on submit
+          ```
+
+4.  **Backend Integration (`useGames.ts` Hook):**
+    * The custom `useGames` hook was refactored to remove the `gameQuery` argument.
+    * The hook now fetches the entire **`gameQuery` object directly from the store** using a selector:
+        ```typescript
+        const gameQuery = useGameQueryStore((s) => s.gameQuery);
+        ```
+    * By including `gameQuery` in the React Query's `queryKey: ["games", gameQuery]`, any change to the `gameQuery` object automatically triggers a re-fetch of game data, maintaining the application's core functionality.
+
+---
+
+This refactoring successfully **centralized the `GameQuery` logic** and eliminated **prop drilling**, leading to much cleaner and simpler component definitions.
+
+Would you like to continue with the next lesson on building a scalable data fetching architecture?
 
 
 
