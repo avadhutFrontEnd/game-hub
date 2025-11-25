@@ -2,50 +2,43 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 2. React 18 for Intermediate Topics > 4. Routing with React Router (2h) ] [ Video: #13-Exercise-Setting-Up-Routing_mp4_6min_32sec ] - Feature: Set Up Basic Routing Structure (Game Hub)
+[Course: 2. React 18 for Intermediate Topics > 4. Routing with React Router (2h) ] [ Video: #14-Exercise-Handling-Errors_mp4_3min_22sec ] - Feature: Implement Custom Error Handling and 404 Page
 
-## Implemented the basic routing structure for the Game Hub application using Nested Routes and cleaned up the old root component (`App.tsx`).
+## Implemented custom error handling for the Game Hub application, displaying context-specific messages for application errors versus invalid routes (404).
 
-The application is now set up as a Single Page Application (SPA) where the navigation bar persists across all views.
+The error page was configured as the `errorElement` of the root route to act as a global error boundary.
 
 ---
 
-### Key Steps and Changes:
+### Key Changes:
 
-1.  ### Installation and Setup
-    * Installed `react-router-dom`:
-        ```bash
-        npm i react-router-dom@6.10.0
+1.  ### Created `ErrorPage` Component (`src/pages/ErrorPage.tsx`)
+    * Used the **`useRouteError`** hook to catch errors thrown during rendering or routing.
+    * Used the **`isRouteErrorResponse`** utility function to determine if the error was a routing error (like a 404) or a general application error.
+    * **Conditional Error Message:**
+        * **Route Error (404):** Displays **"This page does not exist."**
+        * **Application Error:** Displays **"An unexpected error occurred."**
+
+2.  ### Configured Global Error Boundary (`src/routes.tsx`)
+    * The new component was set as the global `errorElement` on the root route:
+        ```typescript
+        {
+          path: "/",
+          element: <Layout />,
+          errorElement: <ErrorPage />, // Catches 404s and app errors in children
+          children: [ /* ... */ ]
+        }
         ```
-    * Handled a TypeScript version mismatch in VS Code by selecting the workspace version.
 
-2.  ### Routing Configuration (`src/routes.tsx`)
-    * Created the router using `createBrowserRouter`.
-    * Defined the **Layout Route** (`path: "/"`) to house the persistent `Layout` component.
-    * Defined child routes:
-        * **Index Route:** `{ index: true, element: <HomePage /> }` (for the root path `/`).
-        * **Dynamic Route:** `{ path: "games/:id", element: <GameDetailPage /> }` (to show individual game details).
-
-3.  ### Layout and Page Components
-    * **`src/pages/Layout.tsx`:** Created a layout component to hold the persistent elements:
+3.  ### Addressed Layout Persistence
+    * Since an `errorElement` replaces the entire parent route's content (including the `<Layout />`) when an error occurs, the navigation bar was temporarily **added directly into the `<ErrorPage />`** component to maintain visual continuity:
         ```tsx
         <NavBar />
-        <Outlet /> // Placeholder for dynamic content
+        <Box padding={5}> /* Error Content */ </Box>
         ```
-    * **`src/pages/HomePage.tsx`:** The content of the original `App.tsx` (the main game grid and sidebar logic) was moved into this new page component, and the component was simplified to only contain the grid structure (removing the redundant `NavBar`).
-    * **`src/pages/GameDetailPage.tsx`:** A placeholder component was created for the detail page.
+    * *(Note: This ensures the user can still navigate away from the error page, even though the error component itself is outside the normal `Layout` flow.)*
 
-4.  ### Application Entry Point (`src/main.tsx`)
-    * The old `<App />` component import and rendering were replaced with the **`<RouterProvider />`** component, passing the configured router object:
-        ```tsx
-        <RouterProvider router={router} />
-        ```
-
-5.  ### Cleanup
-    * The obsolete `src/App.tsx` and `src/App.css` files were deleted.
-
-The application now correctly navigates between the `/` (Home) and `/games/:id` (Detail) routes while preserving the navigation bar.
-
+This implementation provides a clean, user-friendly, and informative error screen for the Game Hub.
 
 
 # my-github Account : 
