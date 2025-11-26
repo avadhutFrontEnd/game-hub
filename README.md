@@ -2,39 +2,53 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 2. React 18 for Intermediate Topics > 4. Routing with React Router (2h) ] [ Video: #18-Exercise-Building-Game-Attributes_mp4_9min_53sec ] - Feature: Build Reusable Game Attributes Display
+[Course: 2. React 18 for Intermediate Topics > 4. Routing with React Router (2h) ] [ Video: #19-Exercise-Building-Game-Trailer_mp4_8min_52sec ] - Feature: Fetch and Display Game Trailer
 
-## Built a reusable structure for displaying game attributes (platforms, genres, metascore, publishers) using a semantic definition list pattern.
+## Implemented fetching and display of the game trailer on the Game Detail Page using a dedicated hook and component.
 
-This feature encapsulates the UI pattern into two components: a reusable `DefinitionItem` and the main `GameAttributes` wrapper.
+This feature uses a nested API endpoint (`/games/{id}/movies`) to fetch video resources and displays the result using a standard HTML5 video player.
 
 ---
 
-### Key Components:
+### Key Changes:
 
-1.  ### `<DefinitionItem />` (`src/components/DefinitionItem.tsx`)
-    * **Purpose:** Provides a consistent layout for a single attribute pair (Term and Description).
-    * **Semantic HTML:** Renders using a Chakra `<Box>` which contains a `<Heading as="dt">` (Definition Term) and a `<dd>` tag (Definition Description).
-    * **Styling:** Applies `marginY={5}`, `fontSize="md"`, and `color="gray.600"` to the term for a subdued heading style.
+1.  ### Defined Trailer Entity (`src/entities/Trailer.ts`)
+    * Created the `Trailer` interface. After inspecting the API response, the structure of the `data` property was typed:
+        ```typescript
+        export interface Trailer {
+          // ... other properties
+          data: { 480: string; max: string }; // Links to video files
+        }
+        ```
 
-2.  ### `<GameAttributes />` (`src/components/GameAttributes.tsx`)
-    * **Purpose:** Renders all game attributes using the `DefinitionItem` in a two-column grid.
-    * **Structure:** Uses a `<SimpleGrid columns={2} as="dl">` (Definition List) to contain the list of definition items.
-    * **Content:** Renders Platforms, Metascore (using the existing `<CriticScore />`), Genres, and Publishers.
-    * **Data Mapping:** Iterates over arrays (`genres`, `parent_platforms`, `publishers`) to display multiple items per attribute, using optional chaining (`?.`) where necessary.
+2.  ### Created `useTrailers` Hook (`src/hooks/useTrailers.ts`)
+    * Defined a new React Query hook that accepts the `gameId`.
+    * Configured the `APIClient` to target the dynamic nested endpoint:
+        ```typescript
+        const apiClient = new APIClient<Trailer>(`/games/${gameId}/movies`);
+        ```
+    * The `queryKey` includes `gameId` to ensure data refetches whenever the game changes.
 
-### Data Model Updates:
+3.  ### Implemented `<GameTrailer />` Component (`src/components/GameTrailer.tsx`)
+    * The component accepts `gameId` as a prop and uses `useTrailers` to fetch the data.
+    * Implemented loading and error handling (returning `null` during loading, throwing error on failure).
+    * If trailers exist, it renders the first trailer using the HTML5 `<video>` tag:
+        ```tsx
+        <video 
+          src={first.data[480]} // Use the 480p link
+          poster={first.preview} // Use the preview image as poster
+          controls 
+        />
+        ```
+    * A check ensures the component returns `null` if no trailers are found for the game.
 
-* **`src/entities/Game.ts`:** Added the `genres: Genre[]` and `publishers: Publisher[]` properties.
-* **`src/entities/Publisher.ts`:** Created a new entity interface defining `id` (number) and `name` (string).
+4.  ### Integration (`src/pages/GameDetailPage.tsx`)
+    * The `GameTrailer` component was added to the detail page, passing the current game's ID:
+        ```tsx
+        <GameTrailer gameId={game.id} />
+        ```
 
-### Integration (`src/pages/GameDetailPage.tsx`):
-
-* The detail page was updated to render the game attributes below the expandable description:
-    ```tsx
-    <GameAttributes game={game}></GameAttributes>
-    ```
-This implementation ensures a highly organized, semantic, and reusable display of metadata.
+This completes the initial detail page content by adding dynamic multimedia.
 
 
 # my-github Account : 
