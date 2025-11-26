@@ -2,35 +2,39 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 2. React 18 for Intermediate Topics > 4. Routing with React Router (2h) ] [ Video: #17-Exercise-Building-Expandable-Text_mp4_5min_32sec ] - Feature: Build Reusable Expandable Text Component
+[Course: 2. React 18 for Intermediate Topics > 4. Routing with React Router (2h) ] [ Video: #18-Exercise-Building-Game-Attributes_mp4_9min_53sec ] - Feature: Build Reusable Game Attributes Display
 
-## Built a reusable `<ExpandableText />` component to summarize long game descriptions with a "Read More/Show Less" toggle button.
+## Built a reusable structure for displaying game attributes (platforms, genres, metascore, publishers) using a semantic definition list pattern.
 
-This component encapsulates the logic for summarizing text and managing its expanded state locally.
+This feature encapsulates the UI pattern into two components: a reusable `DefinitionItem` and the main `GameAttributes` wrapper.
 
 ---
 
-### Key Changes:
+### Key Components:
 
-1.  ### Created `<ExpandableText />` Component (`src/components/ExpandableText.tsx`)
-    * **Local State:** Used `useState` (`expanded`) to manage the expanded/collapsed state of the text.
-    * **Logic:**
-        * Defined a `limit` of 300 characters.
-        * If the text length is within the limit, the full text is displayed.
-        * If the text is long, it calculates the `summary` based on the `expanded` state, appending `...` to the summarized version.
-    * **Safety Check:** Added a check to return `null` if no `children` (text) is passed, preventing errors on null/undefined access.
+1.  ### `<DefinitionItem />` (`src/components/DefinitionItem.tsx`)
+    * **Purpose:** Provides a consistent layout for a single attribute pair (Term and Description).
+    * **Semantic HTML:** Renders using a Chakra `<Box>` which contains a `<Heading as="dt">` (Definition Term) and a `<dd>` tag (Definition Description).
+    * **Styling:** Applies `marginY={5}`, `fontSize="md"`, and `color="gray.600"` to the term for a subdued heading style.
 
-2.  ### Toggle Functionality
-    * The **`Show Less`** / **`Read More`** button toggles the `expanded` state using `setExpanded(!expanded)`.
-    * **Styling:** Applied Chakra UI props (`size="xs"`, `fontWeight="bold"`, `colorScheme="yellow"`) to style the button attractively.
+2.  ### `<GameAttributes />` (`src/components/GameAttributes.tsx`)
+    * **Purpose:** Renders all game attributes using the `DefinitionItem` in a two-column grid.
+    * **Structure:** Uses a `<SimpleGrid columns={2} as="dl">` (Definition List) to contain the list of definition items.
+    * **Content:** Renders Platforms, Metascore (using the existing `<CriticScore />`), Genres, and Publishers.
+    * **Data Mapping:** Iterates over arrays (`genres`, `parent_platforms`, `publishers`) to display multiple items per attribute, using optional chaining (`?.`) where necessary.
 
-3.  ### Implementation (`src/pages/GameDetailPage.tsx`)
-    * The `game.description_raw` text was passed as a child to the new component:
-        ```tsx
-        <ExpandableText>{game.description_raw}</ExpandableText>
-        ```
+### Data Model Updates:
 
-This provides a clean, self-contained way to handle verbose text throughout the application without cluttering the page components.
+* **`src/entities/Game.ts`:** Added the `genres: Genre[]` and `publishers: Publisher[]` properties.
+* **`src/entities/Publisher.ts`:** Created a new entity interface defining `id` (number) and `name` (string).
+
+### Integration (`src/pages/GameDetailPage.tsx`):
+
+* The detail page was updated to render the game attributes below the expandable description:
+    ```tsx
+    <GameAttributes game={game}></GameAttributes>
+    ```
+This implementation ensures a highly organized, semantic, and reusable display of metadata.
 
 
 # my-github Account : 
