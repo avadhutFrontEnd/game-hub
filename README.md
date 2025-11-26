@@ -2,33 +2,29 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 2. React 18 for Intermediate Topics > 4. Routing with React Router (2h) ] [ Video: #21-Exercise-Improving-the-Layout_mp4_1min_43sec ] - Style: Improve Game Detail Page Responsive Layout
+[Course: 2. React 18 for Intermediate Topics > 4. Routing with React Router (2h) ] [ Video: #22-Exercise-Fixing-the-NavBar_mp4_2min_32sec ] - Fix: Improve NavBar Navigation and Search Behavior
 
-## Improved the layout of the Game Detail Page by organizing content into a responsive two-column grid.
-
-This enhances readability and visual appeal on medium and large devices while maintaining a clean single-column layout on smaller screens.
+## Fixed two key navigation issues in the `<NavBar />` component to enhance user experience: logo click behavior and search submission flow.
 
 ---
 
-### Key Changes:
+### Key Fixes:
 
-1.  ### Implemented Responsive Grid (`src/pages/GameDetailPage.tsx`)
-    * Replaced the top-level `<>` fragment with a **`<SimpleGrid>`** component.
-    * Configured the grid to be responsive:
-        * **Small Devices (`base`):** `1` column.
-        * **Medium/Larger Devices (`md`):** `2` columns.
+1.  ### Logo Click Redirection (`src/components/NavBar.tsx`)
+    * The logo image was wrapped with the **`Link`** component from React Router DOM.
+    * The `to` prop was set to the root path (`/`) so clicking the logo always returns the user to the home page.
+    * Added **`objectFit='cover'`** to the Chakra `<Image>` component to fix the squashed aspect ratio issue after wrapping it in the link.
+
+2.  ### Search Form Navigation (`src/components/SearchInput.tsx`)
+    * When a search was performed from a sub-page (like the Game Detail Page), the search filter was correctly updated in the Zustand store, but the user remained on the sub-page.
+    * The **`useNavigate`** hook was imported and used within the form submission handler.
+    * After updating the search text in the store, the user is explicitly redirected to the home page:
         ```typescript
-        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5}>
+        if (ref.current) {
+          setSearchText(ref.current.value);
+          navigate("/"); // <-- Redirects to the homepage where games are displayed
+        }
         ```
-    * Added `spacing={5}` for visual separation between columns.
-
-2.  ### Grouped Content into Columns
-    * **Left Column (`<GridItem>`):** Contains core text content and attributes:
-        * Game Name (`<Heading>`), Description (`<ExpandableText>`), and Attributes (`<GameAttributes>`).
-    * **Right Column (`<GridItem>`):** Contains multimedia content:
-        * Trailer (`<GameTrailer>`) and Screenshots (`<GameScreenshots>`).
-
-This refactoring successfully finalizes the structure of the Game Detail Page for a better user experience across all device sizes.
 
 
 # my-github Account : 
