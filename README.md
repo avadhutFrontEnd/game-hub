@@ -2,29 +2,29 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 2. React 18 for Intermediate Topics > 4. Routing with React Router (2h) ] [ Video: #22-Exercise-Fixing-the-NavBar_mp4_2min_32sec ] - Fix: Improve NavBar Navigation and Search Behavior
+[Course: 2. React 18 for Intermediate Topics > 4. Routing with React Router (2h) ] [ Video: #23-Exercise-Refactoring-Entities_mp4_2min_29sec ] - Refactor: Convert Entity Interfaces to Default Exports
 
-## Fixed two key navigation issues in the `<NavBar />` component to enhance user experience: logo click behavior and search submission flow.
+## Refactored all entity interfaces (`Game`, `Genre`, `Platform`, `Publisher`, `Screenshot`, `Trailer`) to use default exports instead of named exports.
+
+This simplifies import statements across the project, following a common convention when a file has a single primary export.
 
 ---
 
-### Key Fixes:
+### Key Changes:
 
-1.  ### Logo Click Redirection (`src/components/NavBar.tsx`)
-    * The logo image was wrapped with the **`Link`** component from React Router DOM.
-    * The `to` prop was set to the root path (`/`) so clicking the logo always returns the user to the home page.
-    * Added **`objectFit='cover'`** to the Chakra `<Image>` component to fix the squashed aspect ratio issue after wrapping it in the link.
+1.  ### Entity Files Conversion
+    * All entity interfaces in the `src/entities` folder were changed from `export interface EntityName` to **`export default interface EntityName`**.
 
-2.  ### Search Form Navigation (`src/components/SearchInput.tsx`)
-    * When a search was performed from a sub-page (like the Game Detail Page), the search filter was correctly updated in the Zustand store, but the user remained on the sub-page.
-    * The **`useNavigate`** hook was imported and used within the form submission handler.
-    * After updating the search text in the store, the user is explicitly redirected to the home page:
-        ```typescript
-        if (ref.current) {
-          setSearchText(ref.current.value);
-          navigate("/"); // <-- Redirects to the homepage where games are displayed
-        }
-        ```
+2.  ### Import Statement Updates
+    * All files referencing these entities (e.g., hooks, components, API client) were updated to use the simpler default import syntax:
+        * **Before (Named Export):** `import { Game } from "../entities/Game";`
+        * **After (Default Export):** `import Game from "../entities/Game";`
+
+3.  ### Process
+    * The impact of the change was first assessed using "Find All References" in VS Code to ensure all usages were updated correctly across the codebase.
+    * All relevant import statements (in 15 files) were modified to reflect the default export pattern.
+
+This refactoring enhances code readability and maintains consistency in how types are imported and used throughout the application.
 
 
 # my-github Account : 
