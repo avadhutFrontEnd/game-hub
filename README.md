@@ -2,53 +2,49 @@
 react project game-hub
 
 # Commit message format : 
-[Course: 2. React 18 for Intermediate Topics > 4. Routing with React Router (2h) ] [ Video: #19-Exercise-Building-Game-Trailer_mp4_8min_52sec ] - Feature: Fetch and Display Game Trailer
+[Course: 2. React 18 for Intermediate Topics > 4. Routing with React Router (2h) ] [ Video: #20-Exercise-Building-Game-Screenshots_mp4_5min_50sec ] - Feature: Fetch and Display Game Screenshots with Responsive Grid
 
-## Implemented fetching and display of the game trailer on the Game Detail Page using a dedicated hook and component.
+## Implemented fetching and responsive display of game screenshots on the Game Detail Page.
 
-This feature uses a nested API endpoint (`/games/{id}/movies`) to fetch video resources and displays the result using a standard HTML5 video player.
+This feature uses a dedicated hook for the screenshots API endpoint and renders them in a responsive grid layout.
 
 ---
 
 ### Key Changes:
 
-1.  ### Defined Trailer Entity (`src/entities/Trailer.ts`)
-    * Created the `Trailer` interface. After inspecting the API response, the structure of the `data` property was typed:
+1.  ### Defined Screenshot Entity (`src/entities/Screenshot.ts`)
+    * Created the `Screenshot` interface defining the structure of the API response objects:
         ```typescript
-        export interface Trailer {
-          // ... other properties
-          data: { 480: string; max: string }; // Links to video files
+        export interface Screenshot {
+          id: number;
+          image: string;
+          width: number;
+          height: number;
         }
         ```
 
-2.  ### Created `useTrailers` Hook (`src/hooks/useTrailers.ts`)
-    * Defined a new React Query hook that accepts the `gameId`.
+2.  ### Created `useScreenshots` Hook (`src/hooks/useScreenshots.ts`)
+    * Defined a new React Query hook that fetches screenshots for a given `gameId`.
     * Configured the `APIClient` to target the dynamic nested endpoint:
         ```typescript
-        const apiClient = new APIClient<Trailer>(`/games/${gameId}/movies`);
+        const apiClient = new APIClient<Screenshot>(`/games/${gameId}/screenshots`);
         ```
-    * The `queryKey` includes `gameId` to ensure data refetches whenever the game changes.
+    * The hook returns the results of `apiClient.getAll`.
 
-3.  ### Implemented `<GameTrailer />` Component (`src/components/GameTrailer.tsx`)
-    * The component accepts `gameId` as a prop and uses `useTrailers` to fetch the data.
-    * Implemented loading and error handling (returning `null` during loading, throwing error on failure).
-    * If trailers exist, it renders the first trailer using the HTML5 `<video>` tag:
-        ```tsx
-        <video 
-          src={first.data[480]} // Use the 480p link
-          poster={first.preview} // Use the preview image as poster
-          controls 
-        />
-        ```
-    * A check ensures the component returns `null` if no trailers are found for the game.
+3.  ### Implemented `<GameScreenshots />` Component (`src/components/GameScreenshots.tsx`)
+    * The component fetches the data and renders the screenshots in a **`SimpleGrid`** with responsive column definitions:
+        * **Responsive Columns:** `columns={{ base: 1, md: 2 }}` (one column on small devices, two columns on medium/larger devices).
+        * **Spacing:** Added `spacing={2}` to separate the images.
+        * **Rendering:** Iterates over the `results` and renders each image using the Chakra `<Image />` component.
+    * Implemented loading and error handling (returns `null` while loading, throws error on failure).
 
 4.  ### Integration (`src/pages/GameDetailPage.tsx`)
-    * The `GameTrailer` component was added to the detail page, passing the current game's ID:
+    * The new component was added to the detail page, passing the current game's ID:
         ```tsx
-        <GameTrailer gameId={game.id} />
+        <GameScreenshots gameId={game.id} />
         ```
 
-This completes the initial detail page content by adding dynamic multimedia.
+This completes the dynamic content for the Game Detail Page, utilizing a responsive grid for optimal display across different devices.
 
 
 # my-github Account : 
